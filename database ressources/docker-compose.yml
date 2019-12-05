@@ -1,0 +1,23 @@
+version: '3.5'
+
+services:
+  postgres:
+    container_name: maderadb
+    image: postgres:10
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminMadera31!
+      PGDATA: /data/postgres
+    volumes:
+       - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: always
+networks:
+  postgres:
+    driver: bridge
+volumes:
+    postgres:
+
