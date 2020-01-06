@@ -1,0 +1,14 @@
+Installation de la base de données en local
+
+
+1) Installer docker sur sa machine
+
+2) Lancer le fichier docker-compose.yml
+
+docker-compose up -d
+
+3) Créer une base de donnée nommé: maderadb
+
+CREATE DATABASE maderadb
+
+4) Dans le schéma public lancer le script se trouvant dans create_database.sql
