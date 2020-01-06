@@ -20,6 +20,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "name")
-    private String userName;
+    @Column(name = "firstname")
+    private String userFirstName;
 }
