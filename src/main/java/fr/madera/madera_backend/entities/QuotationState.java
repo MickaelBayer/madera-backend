@@ -8,14 +8,15 @@ import org.hibernate.annotations.Cascade;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "provider" , schema = "public")
+@Table(name = "quotation_state" , schema = "public")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Provider {
+public class QuotationState {
     @Id
     @Column(name = "id", insertable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,14 +25,8 @@ public class Provider {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "address")
-    private String address;
-
-    @Column(name = "mail")
-    private String mail;
-
-    @OneToMany(mappedBy = "provider")
+    @OneToMany(mappedBy = "state")
     @JsonBackReference
     @Cascade(org.hibernate.annotations.CascadeType.DELETE)
-    private List<Equipment> equipments;
+    private List<Quotation> quotations;
 }

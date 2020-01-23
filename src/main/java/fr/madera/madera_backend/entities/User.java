@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -30,9 +32,6 @@ public class User {
     @Column(name = "lastname")
     private String lastName;
 
-    @Column(name = "firstname")
-    private String firstName;
-
     @Column(name = "password")
     private String password;
 
@@ -40,5 +39,12 @@ public class User {
     @Column(name = "role")
     private Role role;
 
+    @Column(name = "phone")
+    private String phone;
+
+    @OneToMany(mappedBy = "user")
+    @JsonBackReference
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
+    private List<Project> projects;
 
 }
