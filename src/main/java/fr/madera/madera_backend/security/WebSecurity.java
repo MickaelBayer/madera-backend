@@ -1,6 +1,6 @@
 package fr.madera.madera_backend.security;
 
-import fr.cesi.poec.services.UserDetailsServiceImpl;
+import fr.madera.madera_backend.services.UserDetailsServiceImpl;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
