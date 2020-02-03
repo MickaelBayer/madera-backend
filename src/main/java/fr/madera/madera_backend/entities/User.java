@@ -36,7 +36,7 @@ public class User {
     private String password;
 
     @ManyToOne
-    @Column(name = "role")
+    @JoinColumn
     private Role role;
 
     @Column(name = "phone")

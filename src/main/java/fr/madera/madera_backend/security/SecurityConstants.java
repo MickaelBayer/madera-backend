@@ -9,5 +9,6 @@ public class SecurityConstants {
     public static final String FILMS_URL = "/films";
     public static final String SAVE_COMMANDE = "/commande";
     public static final String SAVE_SIEGE_RESA = "/siege/sieges";
+    public static final String ROLE_URL = "/role";
 
 }

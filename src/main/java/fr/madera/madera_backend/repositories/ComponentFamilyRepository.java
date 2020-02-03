@@ -11,7 +11,7 @@ import java.util.List;
 //l'interface Crudrepository implémente les methodes CRUD classiques
 //CrudRepository<Type de l'entité, type de l'ID>
 @Repository
-public interface ComponentFamilyRepository extends CrudRepository<Component, Long>
+public interface ComponentFamilyRepository extends CrudRepository<ComponentFamily, Long>
 {
 
 }
