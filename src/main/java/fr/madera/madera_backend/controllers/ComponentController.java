@@ -12,9 +12,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/component")
-public class ComponentController {
-
-
+public class ComponentController
+{
     private ComponentRepository componentRepository;
 
     @Autowired
