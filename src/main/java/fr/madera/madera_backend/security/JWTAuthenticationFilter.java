@@ -1,8 +1,9 @@
 package fr.madera.madera_backend.security;
 
 import com.auth0.jwt.JWT;
-import fr.madera.madera_backend.entities.User; // Personne sur cinego
+import fr.madera.madera_backend.entities.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.madera.madera_backend.repositories.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,9 +23,11 @@ import static fr.madera.madera_backend.security.SecurityConstants.*;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
+    private UserRepository userRepository;
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, UserRepository userRepository) {
         this.authenticationManager = authenticationManager;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -50,6 +53,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
+        String userMail = ((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername();
+        User user = this.userRepository.findUserByMail(userMail);
 
         String token = JWT.create()
                 .withSubject(((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername())
@@ -65,7 +70,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         res.setHeader("Access-Control-Allow-Headers", "Content-Type, Origin, Cache-Control, X-Requested-With");
         res.setHeader("Access-Control-Allow-Credentials", "true");
 
-        res.getWriter().write("{\"token\":\"" + token + "\", \"expiresIn\":\""+ EXPIRATION_TIME + "\", \"userId\":\""
-                                    + ((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername() + "\"}");
+        res.getWriter().write("{\"token\":\"" + token + "\"," +
+                              " \"expiresIn\":\""+ EXPIRATION_TIME + "\"," +
+                              " \"userID\":\"" + user.getId() + "\" ," +
+                              " \"userMail\":\"" + user.getMail() + "\" ," +
+                              " \"userRole\":\"" + user.getRole().getId() + "\""+
+                              "}");
     }
 }

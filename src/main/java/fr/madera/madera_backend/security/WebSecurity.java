@@ -1,6 +1,7 @@
 package fr.madera.madera_backend.security;
 
 import fr.madera.madera_backend.services.UserDetailsServiceImpl;
+import fr.madera.madera_backend.repositories.UserRepository;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -33,9 +34,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT, SAVE_COMMANDE).authenticated()
                 .antMatchers(HttpMethod.PUT, SAVE_SIEGE_RESA).authenticated()
                 .antMatchers(HttpMethod.POST, SAVE_SIEGE_RESA).authenticated()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
+                // normalement pour bloqué le reste des routes
+                //.anyRequest().authenticated()
                 .and()
-                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
+                .addFilter(new JWTAuthenticationFilter(authenticationManager(), this.userDetailsService.getUserRepository()))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))
                 // this disables session creation on Spring Security
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
