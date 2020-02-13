@@ -18,9 +18,10 @@ import java.util.List;
 @AllArgsConstructor
 public class User {
 
+    //@Column(name = "id", insertable = false, updatable = false)
     @Id
-    @Column(name = "id", insertable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column( name = "id" )
     private Long id;
 
     @Column(name = "mail")
@@ -35,8 +36,8 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @JoinColumn(name = "role")
     @ManyToOne
-    @JoinColumn
     private Role role;
 
     @Column(name = "phone")
