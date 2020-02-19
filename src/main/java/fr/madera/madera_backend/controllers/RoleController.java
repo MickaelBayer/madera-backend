@@ -1,6 +1,7 @@
 package fr.madera.madera_backend.controllers;
 
 import fr.madera.madera_backend.entities.Role;
+import fr.madera.madera_backend.entities.User;
 import fr.madera.madera_backend.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,11 @@ public class RoleController
         return new ResponseEntity<List<Role>>(
                 (List<Role>)this.roleRepository.findAll(),
                 HttpStatus.OK);
+    }
+
+    @GetMapping("/find")
+    public Iterable<Role> findall(){
+        return this.roleRepository.findAll();
     }
 
     @GetMapping("/{id}")
