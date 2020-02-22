@@ -129,4 +129,10 @@ public class UserController {
             return 0;
         }
     }
+
+    @PostMapping("/changeStateUser")
+    public int changeStateUser(@RequestBody User user){
+        return this.userRepository.changeStateUser(user.getId(), user.getIsActiv());
+    }
+
 }

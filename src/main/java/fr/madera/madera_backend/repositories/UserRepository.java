@@ -30,4 +30,10 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Transactional
     @Query(value = "UPDATE User SET password=?1, firstConnection=true WHERE mail =?2")
     int resetMDPUser(String password, String email);
+
+    //Active ou désactive un utilisateur
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE User SET isActiv=?2 WHERE id =?1")
+    int changeStateUser(Long id, Boolean isActiv);
 }

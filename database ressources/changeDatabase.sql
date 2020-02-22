@@ -5,3 +5,7 @@ alter table "user"
 INSERT INTO public.role (id, name) VALUES (1, 'Admin');
 INSERT INTO public.role (id, name) VALUES (2, 'Commercial');
 INSERT INTO public.role (id, name) VALUES (3, 'Bureau d''étude');
+
+
+alter table "user"
+    add isActiv boolean default true;
