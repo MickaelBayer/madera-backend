@@ -25,4 +25,9 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Query(value = "UPDATE User SET lastName=?2, firstName=?3, phone=?4, mail=?5 WHERE id =?1")
     int updateUser(Long id, String lastName, String firstName, String phone, String mail);
 
+    //Réinitialisation MDP user
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE User SET password=?1 WHERE mail =?2")
+    int resetMDPUser(String password, String email);
 }
