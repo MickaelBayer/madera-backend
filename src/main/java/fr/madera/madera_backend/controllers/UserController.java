@@ -83,4 +83,15 @@ public class UserController {
         }
     }
 
+
+    @PostMapping("/updpwd")
+    public int updateMDPUserById(@RequestBody User user){
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        return this.userRepository.updateMDPUserById(user.getPassword(), user.getId());
+    }
+
+    @PostMapping("/upduserinfo")
+    public int updateUserByEmail(@RequestBody User u){
+        return this.userRepository.updateUser(u.getId(),u.getLastName(),u.getFirstName(),u.getPhone(),u.getMail());
+    }
 }
