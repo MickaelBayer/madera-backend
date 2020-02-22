@@ -44,7 +44,7 @@ public class User {
     private String phone;
 
     @Column(name = "firstconnection")
-    private boolean firstConnection;
+    private Boolean firstConnection;
 
     @OneToMany(mappedBy = "user")
     @JsonBackReference
