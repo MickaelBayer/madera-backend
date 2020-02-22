@@ -40,9 +40,14 @@ public class CustomerController
 
     @PostMapping
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
-        customer = this.customerRepository.save(customer);
-        System.out.println("Customer created : " + customer.getId());
-        return new ResponseEntity<Customer>(customer, HttpStatus.CREATED);
+        try {
+            customer = this.customerRepository.save(customer);
+            System.out.println("Customer created : " + customer.getId());
+            return new ResponseEntity<Customer>(customer, HttpStatus.CREATED);
+        }
+        catch(Exception ex){
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+        }
     }
 
     @PutMapping

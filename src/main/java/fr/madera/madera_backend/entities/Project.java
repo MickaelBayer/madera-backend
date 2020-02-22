@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class Project {
     @Id
     @Column(name = "id", insertable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JoinColumn(name = "user")
