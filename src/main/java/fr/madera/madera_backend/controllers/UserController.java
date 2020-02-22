@@ -2,13 +2,21 @@ package fr.madera.madera_backend.controllers;
 
 import fr.madera.madera_backend.entities.User;
 import fr.madera.madera_backend.repositories.UserRepository;
+import fr.madera.madera_backend.tools.Constante;
+import fr.madera.madera_backend.tools.EmailService;
+import fr.madera.madera_backend.tools.Mail;
+import fr.madera.madera_backend.tools.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -16,6 +24,9 @@ public class UserController {
 
         private UserRepository userRepository;
         private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private EmailService emailService;
 
     @Autowired
     public UserController(UserRepository userRepository,
@@ -93,5 +104,29 @@ public class UserController {
     @PostMapping("/upduserinfo")
     public int updateUserByEmail(@RequestBody User u){
         return this.userRepository.updateUser(u.getId(),u.getLastName(),u.getFirstName(),u.getPhone(),u.getMail());
+    }
+
+    @GetMapping("/resetmdpuser/{email}")
+    public int resetMDPUserByEmail(@PathVariable String email) throws IOException, MessagingException {
+        String mdp = Tools.GeneratePassword(8);
+        String hash_mdp = bCryptPasswordEncoder.encode(mdp);
+        if(this.userRepository.resetMDPUser(hash_mdp,email) == 1){
+            Mail mail = new Mail();
+            mail.setFrom(Constante.EMAIL);
+            mail.setTo(email);
+            mail.setSubject("Réinitialisation de votre mot de passe");
+
+            Map<String, Object> model = new HashMap<String, Object>();
+            model.put("mdp", mdp);
+            model.put("tel", Constante.TEL);
+            model.put("site", Constante.SITE);
+            mail.setModel(model);
+
+            emailService.sendHTMLMessage(mail, "request-new-password");
+
+            return 1;
+        }else{
+            return 0;
+        }
     }
 }

@@ -16,7 +16,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
     // modification du mot de passe via ID
     @Modifying
     @Transactional
-    @Query(value = "UPDATE User SET password=?1 WHERE id =?2")
+    @Query(value = "UPDATE User SET password=?1, firstConnection=false WHERE id =?2")
     int updateMDPUserById(String password, Long id);
 
     // modification de toutes les infos sur un utilisateur hors mis le mot de passe
@@ -25,4 +25,9 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Query(value = "UPDATE User SET lastName=?2, firstName=?3, phone=?4, mail=?5 WHERE id =?1")
     int updateUser(Long id, String lastName, String firstName, String phone, String mail);
 
+    //Réinitialisation MDP user
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE User SET password=?1, firstConnection=true WHERE mail =?2")
+    int resetMDPUser(String password, String email);
 }
