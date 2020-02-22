@@ -16,7 +16,7 @@ import java.util.Date;
 public class Quotation {
     @Id
     @Column(name = "id", insertable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "created_at")
