@@ -74,6 +74,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                               " \"expiresIn\":\""+ EXPIRATION_TIME + "\"," +
                               " \"userID\":\"" + user.getId() + "\" ," +
                               " \"userMail\":\"" + user.getMail() + "\" ," +
+                              " \"isFirstConnection\":\"" + user.getFirstConnection() + "\" ," +
                               " \"userRole\":\"" + user.getRole().getId() + "\""+
                               "}");
     }
