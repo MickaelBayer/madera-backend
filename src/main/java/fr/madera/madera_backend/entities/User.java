@@ -46,6 +46,9 @@ public class User {
     @Column(name = "firstconnection")
     private Boolean firstConnection;
 
+    @Column(name = "isactiv")
+    private Boolean isActiv;
+
     @OneToMany(mappedBy = "user")
     @JsonBackReference
     @Cascade(org.hibernate.annotations.CascadeType.DELETE)
