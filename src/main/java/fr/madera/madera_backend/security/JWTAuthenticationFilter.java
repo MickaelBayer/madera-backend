@@ -75,6 +75,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                               " \"userID\":\"" + user.getId() + "\" ," +
                               " \"userMail\":\"" + user.getMail() + "\" ," +
                               " \"isFirstConnection\":\"" + user.getFirstConnection() + "\" ," +
+                              " \"isActiv\":\"" + user.getIsActiv() + "\" ," +
                               " \"userRole\":\"" + user.getRole().getId() + "\""+
                               "}");
     }
