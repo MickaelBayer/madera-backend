@@ -24,6 +24,12 @@ public class ComponentFamily {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "units")
+    private String units;
+
+    @Column(name = "specs")
+    private String specs;
+
     @OneToMany(mappedBy = "family")
     @JsonBackReference
     @Cascade(org.hibernate.annotations.CascadeType.DELETE)

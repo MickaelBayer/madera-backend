@@ -21,14 +21,8 @@ public class Component {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "unit_use")
-    private String unitUse;
-
-    @Column(name = "nature")
-    private int nature;
-
-    @Column(name = "default_quantity")
-    private double defaultQuantity;
+    @Column(name = "specs")
+    private String specs;
 
     @ManyToOne
     @JoinColumn(name = "family")
