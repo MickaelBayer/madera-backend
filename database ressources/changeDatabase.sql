@@ -46,3 +46,8 @@ VALUES
     ('Panneau de couverture intérieur','m²', 'mm (épaisseur)'),
     ('Couverture tuiles', NULL, 'mm (longueur et largeur)'),
     ('Couverture ardoises', NULL, 'mm (longueur et largeur)');
+
+-- Modif id component 23-2-2020
+CREATE SEQUENCE component_id_seq MINVALUE 10;
+ALTER TABLE public.component
+  ALTER id SET DEFAULT nextval('component_id_seq');

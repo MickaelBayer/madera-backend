@@ -12,7 +12,7 @@ alter table component_family
 create table component
 (
     id               integer not null
-        constraint range_pk
+        constraint component_pk
             primary key,
     name             text,
     unit_use         text,
