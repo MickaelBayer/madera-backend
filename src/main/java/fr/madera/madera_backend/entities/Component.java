@@ -25,6 +25,14 @@ public class Component {
     private String specs;
 
     @ManyToOne
+    @JoinColumn(name = "provider")
+    private Provider provider;
+
+    @ManyToOne
+    @JoinColumn(name = "ranges")
+    private Ranges ranges;
+
+    @ManyToOne
     @JoinColumn(name = "family")
     private ComponentFamily family;
 }

@@ -33,5 +33,5 @@ public class Provider {
     @OneToMany(mappedBy = "provider")
     @JsonBackReference
     @Cascade(org.hibernate.annotations.CascadeType.DELETE)
-    private List<Equipment> equipments;
+    private List<Component> components;
 }
