@@ -51,3 +51,10 @@ VALUES
 CREATE SEQUENCE component_id_seq MINVALUE 10;
 ALTER TABLE public.component
   ALTER id SET DEFAULT nextval('component_id_seq');
+
+-- Insert ranges 24-2-2020
+INSERT INTO public.ranges(id, name, type, percentage_final_price)
+VALUES
+    (1, 'Premium', 'Deutsch qualitat !', 1.15),
+    (2, 'Classic', 'We doing our best ...', 1.07),
+    (3, 'Basic', 'You get what you get ...', 1.00);
