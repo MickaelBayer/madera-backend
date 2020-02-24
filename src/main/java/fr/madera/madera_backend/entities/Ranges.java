@@ -1,11 +1,14 @@
 package fr.madera.madera_backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "ranges" , schema = "public")
@@ -26,4 +29,9 @@ public class Ranges {
 
     @Column(name = "percentage_final_price")
     private double percentageFinalPrice;
+
+    @OneToMany(mappedBy = "ranges")
+    @JsonBackReference
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
+    private List<Component> components;
 }

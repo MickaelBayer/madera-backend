@@ -58,3 +58,12 @@ VALUES
     (1, 'Premium', 'Deutsch qualitat !', 1.15),
     (2, 'Classic', 'We doing our best ...', 1.07),
     (3, 'Basic', 'You get what you get ...', 1.00);
+
+-- Modif component 24-2-2020
+ALTER TABLE public.component
+    ADD COLUMN provider INTEGER,
+    ADD COLUMN ranges INTEGER;
+ALTER TABLE public.component
+    ADD FOREIGN KEY (provider) REFERENCES public.provider(id);
+ALTER TABLE public.component
+    ADD FOREIGN KEY (ranges) REFERENCES public.ranges(id);
