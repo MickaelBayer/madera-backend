@@ -26,14 +26,17 @@ public class Module {
     @Column(name = "angle")
     private String angle;
 
-    @Column(name = "unit_use")
-    private String unitUse;
+    @Column(name = "specs")
+    private String specs;
 
     @Column(name = "cctp")
     private String cctp;
 
     @Column(name = "info")
     private String info;
+
+    @Column(name = "range_percent")
+    private Long rangePercent;
 
     @ManyToOne
     @JoinColumn(name = "range")

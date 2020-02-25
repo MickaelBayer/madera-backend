@@ -31,21 +31,21 @@ ALTER TABLE "component"
 ALTER TABLE public.component_family
     ADD COLUMN units VARCHAR,
     ADD COLUMN specs VARCHAR;
-INSERT INTO public.component_family(name, units, specs)
+INSERT INTO public.component_family(id, name, units, specs)
 VALUES
-    ('Montant lisse', 'cm (longueur)', 'cm (section)'),
-    ('Contrefort', 'cm (longueur)', 'cm (section)'),
-    ('Sabot métallique','pièce', 'cm (section)'),
-    ('Boulon','pièce', 'cm (section)'),
-    ('Gougeon','pièce', 'cm (section)'),
-    ('Elément de montage','pièce', 'cm (section)'),
-    ('Panneau d''isolation','m²', 'cm (épaisseur)'),
-    ('Pare-pluie','m²', 'cm (épaisseur)'),
-    ('Panneau intermédiaire','m²', 'mm (épaisseur)'),
-    ('Panneau de couverture extérieur','m²', 'mm (épaisseur)'),
-    ('Panneau de couverture intérieur','m²', 'mm (épaisseur)'),
-    ('Couverture tuiles', NULL, 'mm (longueur et largeur)'),
-    ('Couverture ardoises', NULL, 'mm (longueur et largeur)');
+    (1, 'Montant lisse', 'cm (longueur)', 'cm (section)'),
+    (2, 'Contrefort', 'cm (longueur)', 'cm (section)'),
+    (3, 'Sabot métallique','pièce', 'cm (section)'),
+    (4, 'Boulon','pièce', 'cm (section)'),
+    (5, 'Gougeon','pièce', 'cm (section)'),
+    (6, 'Elément de montage','pièce', 'cm (section)'),
+    (7, 'Panneau d''isolation','m²', 'cm (épaisseur)'),
+    (8, 'Pare-pluie','m²', 'cm (épaisseur)'),
+    (9, 'Pare-vapeur','m²', 'cm (épaisseur)'),
+    (10, 'Panneau intermédiaire','m²', 'mm (épaisseur)'),
+    (11, 'Panneau de couverture extérieur','m²', 'mm (épaisseur)'),
+    (12, 'Panneau de couverture intérieur','m²', 'mm (épaisseur)'),
+    (13, 'Couverture', NULL, 'mm (longueur et largeur)');
 
 -- Modif id component 23-2-2020
 CREATE SEQUENCE component_id_seq MINVALUE 10;
@@ -90,3 +90,70 @@ VALUES
     (5, 'Plancher porteur', 'Hauteur-Longueur', 'm²'),
     (6, 'Ferme de charpente', 'Longueur', 'unité'),
     (7, 'Couverture (toit)', 'Hauteur-Longueur', 'm²');
+
+--Maybe useless ?
+--Add column range_percent : computed percent value of the module depending on his components
+--The range of a module should be computed on range_percent.
+ALTER TABLE public.module
+    ADD COLUMN range_percent DOUBLE PRECISION;
+-- Drop unit_use (in the module.family) + Add specs
+ALTER TABLE public.module
+    DROP COLUMN unit_use,
+    ADD COLUMN specs DOUBLE PRECISION;
+
+-- Pour chaque Module_family, assoscier des familles de composants qui doivent le composer
+CREATE TABLE public.modfam_compofam(
+   module_family_id INTEGER NOT NULL,
+   component_family_id INTEGER NOT NULL,
+   PRIMARY KEY(module_family_id, component_family_id)
+);
+ALTER TABLE public.modfam_compofam
+    ADD FOREIGN KEY (module_family_id) REFERENCES public.module_family(id),
+    ADD FOREIGN KEY (component_family_id) REFERENCES public.component_family(id);
+INSERT INTO public.modfam_compofam(module_family_id, component_family_id)
+VALUES
+    (1, 11),
+    (1, 8),
+    (1, 2),
+    (1, 9),
+    (1, 10),
+    (1, 7),
+    (1, 1),
+    (1, 3),
+    (1, 4),
+    (1, 5),
+    (1, 12),
+    (2, 12),
+    (2, 3),
+    (2, 1),
+    (2, 7),
+    (2, 4),
+    (3, 5),
+    (3, 3),
+    (3, 12),
+    (3, 1),
+    (3, 7),
+    (3, 10),
+    (3, 4),
+    (4, 12),
+    (4, 1),
+    (4, 7),
+    (4, 6),
+    (4, 4),
+    (5, 12),
+    (5, 7),
+    (5, 1),
+    (5, 10),
+    (5, 6),
+    (5, 3),
+    (5, 2),
+    (6, 2),
+    (6, 1),
+    (6, 7),
+    (6, 10),
+    (7, 13),
+    (7, 8),
+    (7, 1),
+    (7, 5),
+    (7, 3),
+    (7, 9);

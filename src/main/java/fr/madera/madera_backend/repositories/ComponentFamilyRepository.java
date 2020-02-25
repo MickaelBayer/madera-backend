@@ -13,5 +13,9 @@ import java.util.List;
 @Repository
 public interface ComponentFamilyRepository extends CrudRepository<ComponentFamily, Long>
 {
+    @Query(value = "SELECT * FROM component_family \n" +
+                    "\tINNER JOIN modfam_compofam ON modfam_compofam.component_family_id = component_family.id \n" +
+                    "WHERE modfam_compofam.module_family_id = ?1 ;", nativeQuery = true)
+    public List<ComponentFamily> findWithModuleFamily(Long moduleFamilyId);
 
 }
