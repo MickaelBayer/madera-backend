@@ -23,9 +23,6 @@ public class Module {
     @Column(name = "starting_price")
     private double startingPrice;
 
-    @Column(name = "nature")
-    private String nature;
-
     @Column(name = "angle")
     private String angle;
 
@@ -41,4 +38,8 @@ public class Module {
     @ManyToOne
     @JoinColumn(name = "range")
     private Ranges range;
+
+    @ManyToOne
+    @JoinColumn(name = "family")
+    private ModuleFamily family;
 }
