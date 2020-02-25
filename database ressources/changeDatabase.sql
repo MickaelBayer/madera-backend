@@ -67,3 +67,26 @@ ALTER TABLE public.component
     ADD FOREIGN KEY (provider) REFERENCES public.provider(id);
 ALTER TABLE public.component
     ADD FOREIGN KEY (ranges) REFERENCES public.ranges(id);
+
+-- ADD Module_Family / nature 25-2-2020
+CREATE TABLE public.module_family(
+    id serial PRIMARY KEY,
+    name VARCHAR UNIQUE NOT NULL,
+    specs VARCHAR NOT NULL,
+    units VARCHAR NOT NULL
+    );
+ALTER TABLE public.module
+    DROP COLUMN nature;
+ALTER TABLE public.module
+    ADD COLUMN family INTEGER;
+ALTER TABLE public.module
+    ADD FOREIGN KEY (family) REFERENCES public.module_family(id);
+INSERT INTO public.module_family(id, name, specs, units)
+VALUES
+    (1, 'Mur extérieur', 'Hauteur-Longueur', 'm linéaire'),
+    (2, 'Mur intérieur (porteur)', 'Hauteur-Longueur', 'm linéaire'),
+    (3, 'Cloison intérieure', 'Hauteur-Longueur', 'm linéaire'),
+    (4, 'Plancher sur dalle', 'Hauteur-Longueur', 'm²'),
+    (5, 'Plancher porteur', 'Hauteur-Longueur', 'm²'),
+    (6, 'Ferme de charpente', 'Longueur', 'unité'),
+    (7, 'Couverture (toit)', 'Hauteur-Longueur', 'm²');
