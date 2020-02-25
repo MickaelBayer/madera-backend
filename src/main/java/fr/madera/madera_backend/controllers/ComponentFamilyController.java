@@ -1,5 +1,6 @@
 package fr.madera.madera_backend.controllers;
 
+import fr.madera.madera_backend.entities.Component;
 import fr.madera.madera_backend.entities.ComponentFamily;
 import fr.madera.madera_backend.repositories.ComponentFamilyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,13 @@ public class ComponentFamilyController
         } else {
             return new ResponseEntity<ComponentFamily>(HttpStatus.NO_CONTENT);
         }
+    }
+////////////////////////////////////////////////////////////////tableau de compo en fonction de la famille de module
+    @GetMapping("/moduleFamily/{moduleFamilyId}")
+    public ResponseEntity<List<ComponentFamily>> getComponentFamilyByModuleFamilyId(@PathVariable("moduleFamilyId") Long moduleFamilyId) {
+        return new ResponseEntity<List<ComponentFamily>>(
+                (List<ComponentFamily>)this.componentFamilyRepository.findWithModuleFamily(moduleFamilyId),
+                HttpStatus.OK);
     }
 
     @PostMapping
