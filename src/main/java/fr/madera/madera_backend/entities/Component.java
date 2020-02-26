@@ -3,9 +3,11 @@ package fr.madera.madera_backend.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "component" , schema = "public")
@@ -35,4 +37,10 @@ public class Component {
     @ManyToOne
     @JoinColumn(name = "family")
     private ComponentFamily family;
+
+    @OneToMany
+    @JoinTable(name = "module_component",
+            joinColumns = {@JoinColumn(name = "component_id")},
+            inverseJoinColumns = {@JoinColumn(name = "module_id")})
+    private List<Module> modules;
 }

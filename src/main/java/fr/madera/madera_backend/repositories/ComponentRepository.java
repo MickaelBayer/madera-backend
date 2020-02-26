@@ -22,4 +22,9 @@ public interface ComponentRepository extends CrudRepository<Component, Long>
                     "WHERE modfam_compofam.module_family_id = ?1 \n" +
                     "\tAND c.ranges = ?2 ;", nativeQuery = true)
     public List<Component> findWithFamiliesAndRange(Long moduleFamilyId, Long rangeId);
+
+    @Query(value = "SELECT * FROM component c \n" +
+            "\tINNER JOIN module_component ON c.id = module_component.component_id \n" +
+            "WHERE module_component.module_id = ?1 ;", nativeQuery = true)
+    public List<Component> findByModuleId(Long module_id);
 }

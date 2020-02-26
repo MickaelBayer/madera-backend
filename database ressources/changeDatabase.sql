@@ -91,11 +91,7 @@ VALUES
     (6, 'Ferme de charpente', 'Longueur', 'unité'),
     (7, 'Couverture (toit)', 'Hauteur-Longueur', 'm²');
 
---Maybe useless ?
---Add column range_percent : computed percent value of the module depending on his components
---The range of a module should be computed on range_percent.
-ALTER TABLE public.module
-    ADD COLUMN range_percent DOUBLE PRECISION;
+--25-02-2020
 -- Drop unit_use (in the module.family) + Add specs
 ALTER TABLE public.module
     DROP COLUMN unit_use,
@@ -157,3 +153,40 @@ VALUES
     (7, 5),
     (7, 3),
     (7, 9);
+
+--26-02-2020
+--Modif module_component table
+DROP TABLE public.module_component;
+CREATE TABLE public.module_component(
+   module_id INTEGER NOT NULL,
+   component_id INTEGER NOT NULL,
+   PRIMARY KEY(module_id, component_id)
+);
+ALTER TABLE public.module_component
+    ADD FOREIGN KEY (module_id) REFERENCES public.module(id),
+    ADD FOREIGN KEY (component_id) REFERENCES public.component(id);
+--Creation of the angle enum
+CREATE TYPE angle AS ENUM ('Sans', 'Sortant', 'Entrant');
+--Creation of the angle enum
+CREATE TABLE public.cctp(
+   id serial PRIMARY KEY,
+   name VARCHAR NOT NULL
+);
+INSERT INTO public.cctp(id, name)
+VALUES
+    (1, 'Cctp 1'),
+    (2, 'Cctp 2'),
+    (3, 'Cctp 3'),
+    (4, 'Cctp 4'),
+    (5, 'Cctp 5');
+--Delete angle and cctp from module
+ALTER TABLE public.module
+    DROP COLUMN angle,
+    DROP COLUMN cctp;
+ALTER TABLE public.module
+    ADD COLUMN cctp INTEGER NOT NULL;
+ALTER TABLE public.module
+    ADD FOREIGN KEY (cctp) REFERENCES public.cctp(id);
+ALTER TABLE public.module
+    DROP COLUMN specs,
+    ADD COLUMN specs VARCHAR NOT NULL;
