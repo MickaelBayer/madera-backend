@@ -38,10 +38,11 @@ public class ModuleController
         }
     }
 
+
     @PostMapping
     public ResponseEntity<Module> createModule(@RequestBody Module module) {
         module = this.moduleRepository.save(module);
-        System.out.println("Component Family created : " + module.getId());
+        System.out.println("Module created : " + module.getId());
         return new ResponseEntity<Module>(module, HttpStatus.CREATED);
     }
 

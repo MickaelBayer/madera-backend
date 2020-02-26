@@ -43,6 +43,13 @@ public class ComponentController
         }
     }
 
+    @GetMapping("/module/{id}")
+    public ResponseEntity<List<Component>>  getComponentsByModuleId(@PathVariable Long id) {
+        return new ResponseEntity<List<Component>>(
+                (List<Component>)this.componentRepository.findByModuleId(id),
+                HttpStatus.OK);
+    }
+
     @GetMapping("/projet/{idFilm}")
     public ResponseEntity<List<Component>> getComponentWithFamiliesAndRange(@PathVariable Long idProjet) {
         return new ResponseEntity<List<Component>>(
