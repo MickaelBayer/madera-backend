@@ -1,5 +1,6 @@
 package fr.madera.madera_backend.controllers;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import fr.madera.madera_backend.entities.Module;
 import fr.madera.madera_backend.repositories.ModuleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,6 @@ public class ModuleController
             return new ResponseEntity<Module>(HttpStatus.NO_CONTENT);
         }
     }
-
 
     @PostMapping
     public ResponseEntity<Module> createModule(@RequestBody Module module) {
