@@ -30,6 +30,9 @@ public class Module {
     @Column(name = "specs")
     private String specs;
 
+    @Column(name = "isactive")
+    private boolean isActive;
+
     @ManyToOne
     @JoinColumn(name = "cctp")
     private Cctp cctp;
