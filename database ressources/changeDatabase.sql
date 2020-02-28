@@ -159,8 +159,8 @@ VALUES
 DROP TABLE public.module_component;
 CREATE TABLE public.module_component(
    module_id INTEGER NOT NULL,
-   component_id INTEGER NOT NULL,
-   PRIMARY KEY(module_id, component_id)
+ -  component_id INTEGER NOT NULL,
+  -RIMARY KEY(module_id, component_id)
 );
 ALTER TABLE public.module_component
     ADD FOREIGN KEY (module_id) REFERENCES public.module(id),
@@ -190,3 +190,9 @@ ALTER TABLE public.module
 ALTER TABLE public.module
     DROP COLUMN specs,
     ADD COLUMN specs VARCHAR NOT NULL;
+
+--28-2-2020
+ALTER TABLE public.project
+    ADD COLUMN range INTEGER;
+ALTER TABLE public.project
+    ADD FOREIGN KEY (range) REFERENCES public.ranges(id);
