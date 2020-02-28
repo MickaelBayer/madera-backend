@@ -25,4 +25,8 @@ public class Project {
     @JoinColumn(name = "customer")
     @ManyToOne
     private Customer customer;
+
+    @JoinColumn(name = "range")
+    @ManyToOne
+    private Ranges range;
 }
