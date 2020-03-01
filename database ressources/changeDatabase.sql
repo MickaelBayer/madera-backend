@@ -223,3 +223,5 @@ ALTER TABLE public.project_module
     DROP COLUMN "price",
     ADD COLUMN "position" INTEGER,
     ADD COLUMN "quantity" DOUBLE PRECISION;
+DROP TABLE module_equipment;
+DROP TABLE equipment;
