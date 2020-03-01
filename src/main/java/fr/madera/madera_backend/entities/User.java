@@ -49,9 +49,8 @@ public class User {
     @Column(name = "isactiv")
     private Boolean isActiv;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "commercial")
     @JsonBackReference
-    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     private List<Project> projects;
 
 }

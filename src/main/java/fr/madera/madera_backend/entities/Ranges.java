@@ -31,7 +31,14 @@ public class Ranges {
     private double percentageFinalPrice;
 
     @OneToMany(mappedBy = "ranges")
-    @JsonBackReference
-    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
+    @JsonBackReference(value = "component-range-back-reference")
     private List<Component> components;
+
+    @OneToMany(mappedBy = "ranges")
+    @JsonBackReference(value = "project-range-back-reference")
+    private List<Project> projects;
+
+    @OneToMany(mappedBy = "ranges")
+    @JsonBackReference(value = "module-range-back-reference")
+    private List<Module> modules;
 }
