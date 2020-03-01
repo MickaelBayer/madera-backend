@@ -36,7 +36,7 @@ public class Customer {
     @Column(name = "phone")
     private String phone;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "customer")
     @JsonBackReference
     @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     private List<Project> projects;

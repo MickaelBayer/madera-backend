@@ -8,6 +8,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.internal.build.AllowSysOut;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -39,6 +40,9 @@ public class Module {
 
     @Column(name = "info")
     private String info;
+
+    @Column(name = "created_at")
+    private Date createdAt = new Date();
 
     @ManyToOne
     @JoinColumn(name = "range")

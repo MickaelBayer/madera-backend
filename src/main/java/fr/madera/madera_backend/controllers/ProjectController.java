@@ -41,7 +41,7 @@ public class ProjectController
     @PostMapping
     public ResponseEntity<Project> createProject(@RequestBody Project project) {
         project = this.projectRepository.save(project);
-        System.out.println("Component Family created : " + project.getId());
+        System.out.println("Project created : " + project.getId());
         return new ResponseEntity<Project>(project, HttpStatus.CREATED);
     }
 

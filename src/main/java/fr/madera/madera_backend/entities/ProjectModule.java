@@ -9,33 +9,30 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "quotation" , schema = "public")
+@Table(name = "project_module" , schema = "public")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Quotation {
+public class ProjectModule {
     @Id
     @Column(name = "id", insertable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "created_at")
-    private Date created_at = new Date();
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "updated_at")
-    private Date updated_at;
+    @Column(name = "position")
+    private int position;
 
-    @Column(name = "total_price")
-    private double total_price;
-
-    @ManyToOne
-    @JoinColumn(name = "state")
-    private QuotationState state;
-
-    @Column(name = "discount")
-    private int discount;
+    @Column(name = "quantity")
+    private Long quantity;
 
     @ManyToOne
     @JoinColumn(name = "project")
     private Project project;
+
+    @JoinColumn(name = "module")
+    @ManyToOne
+    private Module module;
 }

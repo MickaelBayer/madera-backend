@@ -159,8 +159,8 @@ VALUES
 DROP TABLE public.module_component;
 CREATE TABLE public.module_component(
    module_id INTEGER NOT NULL,
- -  component_id INTEGER NOT NULL,
-  -RIMARY KEY(module_id, component_id)
+    component_id INTEGER NOT NULL,
+  PRIMARY KEY(module_id, component_id)
 );
 ALTER TABLE public.module_component
     ADD FOREIGN KEY (module_id) REFERENCES public.module(id),
@@ -196,3 +196,30 @@ ALTER TABLE public.project
     ADD COLUMN range INTEGER;
 ALTER TABLE public.project
     ADD FOREIGN KEY (range) REFERENCES public.ranges(id);
+
+--29-02-2020
+ALTER TABLE "module"
+    DROP COLUMN creationDate;
+ALTER TABLE "module"
+    ADD COLUMN created_at timestamptz DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE "project"
+    ADD COLUMN created_at timestamptz DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE "project"
+    DROP CONSTRAINT project_user_id_fk,
+    DROP COLUMN "user",
+    ADD COLUMN commercial INTEGER,
+    ADD FOREIGN KEY (commercial) REFERENCES public.user(id);
+
+INSERT INTO module_family(id, name, specs, units)
+VALUES
+    (8, 'Angle', 'Longueur', 'degrés');
+
+--01-3-2020
+ALTER TABLE public.project_module
+    DROP COLUMN "width",
+    DROP COLUMN "length",
+    DROP COLUMN "price",
+    ADD COLUMN "position" INTEGER,
+    ADD COLUMN "quantity" DOUBLE PRECISION;
