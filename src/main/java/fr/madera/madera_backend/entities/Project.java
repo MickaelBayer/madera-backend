@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
@@ -41,5 +42,6 @@ public class Project {
 
     @OneToMany(mappedBy = "project")
     @JsonBackReference
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     private List<ProjectModule> projectModules;
 }
