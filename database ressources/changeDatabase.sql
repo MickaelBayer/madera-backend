@@ -225,3 +225,13 @@ ALTER TABLE public.project_module
     ADD COLUMN "quantity" DOUBLE PRECISION;
 DROP TABLE module_equipment;
 DROP TABLE equipment;
+
+
+--05-03-2020
+
+INSERT INTO public.quotation_state (id, name) VALUES (1, 'Brouillon');
+INSERT INTO public.quotation_state (id, name) VALUES (2, 'Accepté');
+INSERT INTO public.quotation_state (id, name) VALUES (3, 'En attente');
+INSERT INTO public.quotation_state (id, name) VALUES (4, 'Refusé');
+INSERT INTO public.quotation_state (id, name) VALUES (5, 'En commande');
+INSERT INTO public.quotation_state (id, name) VALUES (6, 'Transfert en facturation');
