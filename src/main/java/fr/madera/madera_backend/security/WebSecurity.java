@@ -30,11 +30,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
-                .antMatchers(HttpMethod.GET, ROLE_URL).permitAll()
-                .antMatchers(HttpMethod.PUT, SAVE_COMMANDE).authenticated()
-                .antMatchers(HttpMethod.PUT, SAVE_SIEGE_RESA).authenticated()
-                .antMatchers(HttpMethod.POST, SAVE_SIEGE_RESA).authenticated()
-                .anyRequest().permitAll()
+                .anyRequest().authenticated()
                 // normalement pour bloqué le reste des routes
                 //.anyRequest().authenticated()
                 .and()
