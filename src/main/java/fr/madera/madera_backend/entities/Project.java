@@ -41,7 +41,12 @@ public class Project {
     private Ranges ranges;
 
     @OneToMany(mappedBy = "project")
-    @JsonBackReference
+    @JsonBackReference(value = "project-projectModules-back-reference")
     @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     private List<ProjectModule> projectModules;
+
+    @OneToMany(mappedBy = "project")
+    @JsonBackReference(value = "project-quotation-back-reference")
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
+    private List<Quotation> quotations;
 }

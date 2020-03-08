@@ -1,5 +1,6 @@
 package fr.madera.madera_backend.controllers;
 
+import fr.madera.madera_backend.entities.ProjectModule;
 import fr.madera.madera_backend.entities.Quotation;
 import fr.madera.madera_backend.repositories.QuotationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +39,17 @@ public class QuotationController
         }
     }
 
+    @GetMapping("/project/{id}")
+    public ResponseEntity<List<Quotation>> getByProject(@PathVariable Long id) {
+        return new ResponseEntity<List<Quotation>>(
+                (List<Quotation>)this.quotationRepository.findByProject(id),
+                HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Quotation> createQuotation(@RequestBody Quotation quotation) {
         quotation = this.quotationRepository.save(quotation);
-        System.out.println("Component Family created : " + quotation.getId());
+        System.out.println("Quotation created : " + quotation.getId());
         return new ResponseEntity<Quotation>(quotation, HttpStatus.CREATED);
     }
 
