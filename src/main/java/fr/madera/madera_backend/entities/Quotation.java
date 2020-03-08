@@ -23,10 +23,10 @@ public class Quotation {
     private Date created_at = new Date();
 
     @Column(name = "updated_at")
-    private Date updated_at;
+    private Date updated_at = new Date();
 
     @Column(name = "total_price")
-    private double total_price;
+    private double totalPrice;
 
     @ManyToOne
     @JoinColumn(name = "state")

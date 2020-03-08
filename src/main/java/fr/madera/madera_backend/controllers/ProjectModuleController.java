@@ -1,7 +1,9 @@
 package fr.madera.madera_backend.controllers;
 
 import fr.madera.madera_backend.entities.ProjectModule;
+import fr.madera.madera_backend.entities.Quotation;
 import fr.madera.madera_backend.repositories.ProjectModuleRepository;
+import fr.madera.madera_backend.repositories.QuotationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +16,14 @@ import java.util.List;
 public class ProjectModuleController
 {
     private ProjectModuleRepository projectModuleRepository;
+    private QuotationRepository quotationRepository;
 
     @Autowired
-    public ProjectModuleController(ProjectModuleRepository projectModuleRepository)
+    public ProjectModuleController(ProjectModuleRepository projectModuleRepository,
+                                   QuotationRepository quotationRepository)
     {
         this.projectModuleRepository = projectModuleRepository;
+        this.quotationRepository = quotationRepository;
     }
 
     @GetMapping
